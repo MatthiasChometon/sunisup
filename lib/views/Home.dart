@@ -1,5 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sunisup/models/all_weather.dart';
+import 'package:sunisup/models/meteo.dart';
+import 'package:sunisup/services/MeteoService.dart';
+import 'package:sunisup/widgets/WeatherPanel.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.title}) : super(key: key);
@@ -25,25 +30,28 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: FutureBuilder<List<All_weather>>(
+          future: getAllMeteoInDatabase(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: Text("Chargement en cours ... "));
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, i) {
+                    return WeatherPanel(
+                        meteo: snapshot.data![i].meteo,
+                        forecastWeather: snapshot.data![i].forecastWeather);
+                  });
+            } else {
+              return const Text("Une erreur est survenue");
+            }
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
