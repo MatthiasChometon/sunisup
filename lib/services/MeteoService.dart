@@ -75,7 +75,5 @@ Future<List<All_weather>> getAllMeteoInDatabase() async {
     return All_weather(meteo, forecastWeather);
   }).toList());
 
-  inspect(meteo);
-
   return meteo;
 }
