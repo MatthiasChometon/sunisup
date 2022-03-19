@@ -160,7 +160,9 @@ class Wind {
   Wind({this.speed, this.deg});
 
   Wind.fromJson(Map<String, dynamic> json) {
-    speed = json['speed'];
+    speed = json['speed'].runtimeType == int
+        ? json['speed'].toDouble()
+        : json['speed'];
     deg = json['deg'];
   }
 
