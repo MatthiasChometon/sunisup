@@ -57,9 +57,9 @@ class _HomeState extends State<Home> {
                         newIndex -= 1;
                       }
                       setState(() {
-                                              final All_weather item =
-                          snapshot.data!.removeAt(oldIndex);
-                      snapshot.data!.insert(newIndex, item);
+                        final All_weather item =
+                            snapshot.data!.removeAt(oldIndex);
+                        snapshot.data!.insert(newIndex, item);
                       });
                     },
                   ));
