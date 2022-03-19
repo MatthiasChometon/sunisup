@@ -36,13 +36,31 @@ class _HomeState extends State<Home> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: Text("Chargement en cours ... "));
             } else if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, i) {
-                    return WeatherPanel(
-                        meteo: snapshot.data![i].meteo,
-                        forecastWeather: snapshot.data![i].forecastWeather);
-                  });
+              return SizedBox(
+                  height: 600,
+                  child: ReorderableListView(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    children: <Widget>[
+                      for (int index = 0;
+                          index < snapshot.data!.length;
+                          index += 1)
+                        WeatherPanel(
+                            key: Key('$index'),
+                            meteo: snapshot.data![index].meteo,
+                            forecastWeather:
+                                snapshot.data![index].forecastWeather)
+                    ],
+                    onReorder: (int oldIndex, int newIndex) {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      final All_weather item =
+                          snapshot.data!.removeAt(oldIndex);
+                      snapshot.data!.insert(newIndex, item);
+                    },
+                  ));
             } else {
               return const Text("Une erreur est survenue");
             }
