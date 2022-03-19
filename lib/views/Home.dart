@@ -56,9 +56,11 @@ class _HomeState extends State<Home> {
                       if (oldIndex < newIndex) {
                         newIndex -= 1;
                       }
-                      final All_weather item =
-                          snapshot.data!.removeAt(oldIndex);
-                      snapshot.data!.insert(newIndex, item);
+                      setState(() {
+                        final All_weather item =
+                            snapshot.data!.removeAt(oldIndex);
+                        snapshot.data!.insert(newIndex, item);
+                      });
                     },
                   ));
             } else {
