@@ -52,7 +52,7 @@ class _WeatherPanelState extends State<WeatherPanel> {
                               icon: const Icon(Icons.delete),
                               tooltip: '',
                               onPressed: () {
-                                InfoButton(widget.city.Id_city ?? 0);
+                                DeleteCity(widget.city.Id_city ?? 0);
                               },
                             ),
                           ]),
@@ -111,16 +111,6 @@ class _WeatherPanelState extends State<WeatherPanel> {
             },
           ),
         ));
-  }
-  Widget InfoButton(int id) {
-    return ElevatedButton(
-      onPressed: () => () {
-        DeleteCity(id);
-      },
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
-      child: const Text('Enregistrer'),
-    );
   }
 
   Future DeleteCity(id) async {
