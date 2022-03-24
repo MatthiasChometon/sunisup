@@ -8,6 +8,7 @@ import 'package:sunisup/widgets/DatePanel.dart';
 import 'package:sunisup/widgets/MeteoPanel.dart';
 import '../db/City.dart';
 import '../models/City.dart';
+import '../views/Home.dart';
 
 class WeatherPanel extends StatefulWidget {
   const WeatherPanel(
@@ -123,5 +124,8 @@ class _WeatherPanelState extends State<WeatherPanel> {
 
   Future DeleteCity(id) async {
     await CityDatabase.instance.DeleteCity(id);
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const Home(title: "SunIsUp")),
+    );
   }
 }
