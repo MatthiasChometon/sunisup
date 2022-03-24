@@ -51,35 +51,38 @@ class _HomeState extends State<Home> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: ReorderableListView(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      children: <Widget>[
-                        for (int index = 0;
-                            index < snapshot.data!.length;
-                            index += 1)
-                          WeatherPanel(
-                              key: Key('$index'),
-                              meteo: snapshot.data![index].meteo,
-                              forecastWeather:
-                                  snapshot.data![index].forecastWeather)
-                      ],
-                      onReorder: (int oldIndex, int newIndex) {
-                        if (oldIndex < newIndex) {
-                          newIndex -= 1;
-                        }
-                        setState(() {
-                          getWeatherWallpaper(
-                              snapshot.data![0].meteo.weather![0].main);
-                          final All_weather item =
-                              snapshot.data!.removeAt(oldIndex);
-                          snapshot.data!.insert(newIndex, item);
-                        });
-                      },
-                    )),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30.0),
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: ReorderableListView(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        children: <Widget>[
+                          for (int index = 0;
+                              index < snapshot.data!.length;
+                              index += 1)
+                            WeatherPanel(
+                                key: Key('$index'),
+                                meteo: snapshot.data![index].meteo,
+                                forecastWeather:
+                                    snapshot.data![index].forecastWeather)
+                        ],
+                        onReorder: (int oldIndex, int newIndex) {
+                          if (oldIndex < newIndex) {
+                            newIndex -= 1;
+                          }
+                          setState(() {
+                            getWeatherWallpaper(
+                                snapshot.data![0].meteo.weather![0].main);
+                            final All_weather item =
+                                snapshot.data!.removeAt(oldIndex);
+                            snapshot.data!.insert(newIndex, item);
+                          });
+                        },
+                      )),
+                ),
               );
             } else {
               return const Text("Une erreur est survenue");
