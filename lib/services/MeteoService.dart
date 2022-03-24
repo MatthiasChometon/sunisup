@@ -64,37 +64,23 @@ Future<String> getWeatherIcon(String? iconPath) async {
   return url.toString();
 }
 
-Future<List<Location>> getpositon(String name) async {
+Future<List<Location>> getPosition(String name) async {
   List<Location> coordoner = await locationFromAddress(name);
   return coordoner;
 }
 
 Future<List<All_weather>> getAllMeteoInDatabase() async {
-/* List<Position> dbMeteo = [
-    Position('12.17', '12.25'),
-    Position('24.17', '24.42'),
-    Position('12.17', '12.25'),
-    Position('24.17', '24.42'),
-  ];*/
-  var citys = await CityDatabase.instance.FetchallCitiy();
+  var citys = await CityDatabase.instance.FetchAllCity();
   var Data = await Future.wait(citys.map((item) async {
-    //List<Location> coordoner = await locationFromAddress(item.Libelle.toString());
-    List<Location> position = await getpositon(item.Libelle.toString());
+    List<Location> position = await getPosition(item.Libelle.toString());
 
     var meteo = await getMeteo(
         position[0].latitude.toString(), position[0].longitude.toString());
     var forecastWeather = await getForecastWeather(
         position[0].latitude.toString(), position[0].longitude.toString());
-final city = City(Id_city: item.Id_city,Libelle: item.Libelle);
-    //var ville = await CityDatabase.instance.getCity(item.Id_city.toInt());
+    final city = City(Id_city: item.Id_city, Libelle: item.Libelle);
     return All_weather(city, meteo, forecastWeather);
   }).toList());
 
-  /*var meteo = await Future.wait(dbMeteo.map((item) async {
-    var meteo = await getMeteo(item.lat, item.lon);
-    var forecastWeather = await getForecastWeather(item.lat, item.lon);
-
-    return All_weather(item,meteo, forecastWeather);
-  }).toList());*/
   return Data;
 }

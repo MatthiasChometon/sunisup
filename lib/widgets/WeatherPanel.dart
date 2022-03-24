@@ -30,14 +30,17 @@ class WeatherPanel extends StatefulWidget {
 
 class _WeatherPanelState extends State<WeatherPanel> {
   bool _expanded = false;
-
+  bool isFirstLoad = true;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SharedPreferences>(
         future: GetScrollStates(),
         builder: (context, snapshot) {
-          _expanded = snapshot.data?.getBool("${widget.city.Id_city}") ?? false;
-          print(snapshot.data);
+          if (snapshot.data?.getBool("${widget.city.Id_city}") != null &&
+              isFirstLoad) {
+            _expanded = snapshot.data!.getBool("${widget.city.Id_city}")!;
+            isFirstLoad = false;
+          }
 
           return Container(
               margin: const EdgeInsets.all(10),
@@ -51,18 +54,22 @@ class _WeatherPanelState extends State<WeatherPanel> {
                           title: Row(
                             children: [
                               Column(children: [
-                                Row(children: [
-                                  Text("${widget.city.Libelle}",
-                                      style: const TextStyle(fontSize: 30)),
-                                  Image.network(widget.meteo.icon),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    tooltip: '',
-                                    onPressed: () {
-                                      DeleteCity(widget.city.Id_city ?? 0);
-                                    },
-                                  ),
-                                ]),
+                                Row(
+                                  children: [
+                                    Row(children: [
+                                      Text("${widget.city.Libelle}",
+                                          style: const TextStyle(fontSize: 30)),
+                                      Image.network(widget.meteo.icon),
+                                    ]),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      tooltip: '',
+                                      onPressed: () {
+                                        DeleteCity(widget.city.Id_city ?? 0);
+                                      },
+                                    ),
+                                  ],
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: DatePanel(date: DateTime.now()),
@@ -114,9 +121,9 @@ class _WeatherPanelState extends State<WeatherPanel> {
                     ),
                   ],
                   expansionCallback: (panelIndex, isExpanded) {
-                    snapshot.data!
-                        .setBool("${widget.city.Id_city}", !_expanded);
                     setState(() {
+                      snapshot.data!
+                          .setBool("${widget.city.Id_city}", !_expanded);
                       _expanded = !_expanded;
                     });
                   },

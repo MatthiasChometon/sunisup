@@ -42,7 +42,7 @@ class CityDatabase {
     return val;
   }
 
-  Future<List<City>> FetchallCitiy() async {
+  Future<List<City>> FetchAllCity() async {
     var db = await instance.database;
 
     const orderBy = '${CityFields.Libelle} ASC';
@@ -60,8 +60,6 @@ class CityDatabase {
       whereArgs: [Id_city],
     );
   }
-
-  
 
   Future close() async {
     final db = await instance.database;
