@@ -6,12 +6,17 @@ import 'package:sunisup/models/forecast_weather.dart';
 import 'package:sunisup/models/meteo.dart';
 import 'package:sunisup/widgets/DatePanel.dart';
 import 'package:sunisup/widgets/MeteoPanel.dart';
+import '../db/City.dart';
+import '../models/City.dart';
 
 class WeatherPanel extends StatefulWidget {
   const WeatherPanel(
-      {Key? key, required this.meteo, required this.forecastWeather})
+      {Key? key,
+      required this.city,
+      required this.meteo,
+      required this.forecastWeather})
       : super(key: key);
-
+  final  City city;
   final Meteo meteo;
   final ForecastWeather forecastWeather;
 
@@ -38,7 +43,18 @@ class _WeatherPanelState extends State<WeatherPanel> {
                     title: Row(
                       children: [
                         Column(children: [
-                          const Text('Paris', style: TextStyle(fontSize: 30)),
+                          Text(
+                            "${widget.city.Libelle}%",
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Row(children: [
+                            MeteoPanel(
+                                temp: "${widget.meteo.main!.temp}",
+                                humidity: "${widget.meteo.main!.humidity}%",
+                                deg: "${widget.meteo.wind!.deg}%"),
+                            Image.network(widget.meteo.icon),
+                           
+                          ]),
                           DatePanel(date: DateTime.now()),
                           Row(children: [
                             MeteoPanel(
@@ -87,4 +103,6 @@ class _WeatherPanelState extends State<WeatherPanel> {
           ),
         ));
   }
+
+
 }

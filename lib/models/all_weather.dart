@@ -1,8 +1,10 @@
 import 'package:sunisup/models/forecast_weather.dart';
 import 'package:sunisup/models/meteo.dart';
+import './City.dart';
 
 class All_weather {
   final Meteo meteo;
   final ForecastWeather forecastWeather;
-  All_weather(this.meteo, this.forecastWeather);
+  final City city;
+  All_weather(this.city, this.meteo, this.forecastWeather);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import '../db/City.dart';
 
 class DatePanel extends StatefulWidget {
   const DatePanel({Key? key, required this.date}) : super(key: key);
@@ -22,4 +23,6 @@ class _DatePanelState extends State<DatePanel> {
       Text(DateFormat('MMMM dd, yyyy').format(widget.date))
     ], crossAxisAlignment: CrossAxisAlignment.start);
   }
+
+
 }
