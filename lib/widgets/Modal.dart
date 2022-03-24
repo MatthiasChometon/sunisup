@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sunisup/views/Home.dart';
 import '../db/City.dart';
 import '../models/City.dart';
 
@@ -64,5 +65,8 @@ class _buildPopupDialogState extends State<Modal> {
     String Libelle = libelle;
 
     await CityDatabase.instance.CreateCity(libelle);
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const Home(title: "SunIsUp")),
+    );
   }
 }
