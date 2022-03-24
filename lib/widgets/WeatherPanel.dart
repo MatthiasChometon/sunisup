@@ -8,15 +8,14 @@ import 'package:sunisup/widgets/DatePanel.dart';
 import 'package:sunisup/widgets/MeteoPanel.dart';
 import '../db/City.dart';
 
-
 class WeatherPanel extends StatefulWidget {
   const WeatherPanel(
       {Key? key,
-      required city,
+      required this.city,
       required this.meteo,
       required this.forecastWeather})
       : super(key: key);
-
+  final city;
   final Meteo meteo;
   final ForecastWeather forecastWeather;
 
@@ -28,6 +27,7 @@ class WeatherPanel extends StatefulWidget {
 
 class _WeatherPanelState extends State<WeatherPanel> {
   bool _expanded = false;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +44,18 @@ class _WeatherPanelState extends State<WeatherPanel> {
                       children: [
                         Column(children: [
                           Text(
-                            "${widget.meteo.main!.humidity}°",
+                            "${widget.city.main!.libelle}%",
                             style: const TextStyle(color: Colors.black),
                           ),
+                          Row(children: [
+                            MeteoPanel(
+                                temp: "${widget.meteo.main!.temp}",
+                                humidity: "${widget.meteo.main!.humidity}%",
+                                deg: "${widget.meteo.wind!.deg}%"),
+                            Image.network(widget.meteo.icon),
+                         
+                          ]),
+                          
                           DatePanel(date: DateTime.now()),
                           Row(children: [
                             MeteoPanel(
@@ -94,11 +103,6 @@ class _WeatherPanelState extends State<WeatherPanel> {
             },
           ),
         ));
-  }
-  Future Deletecity(int id) async {
-
-
-    await CityDatabase.instance.DeleteCity(id);
   }
 
 }

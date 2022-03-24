@@ -39,7 +39,7 @@ class _buildPopupDialogState extends State<buildPopupDialog> {
                         onChanged: (val) => libelle = val,
                         obscureText: true,
                       ),
-                      buildButton(),
+                      InfoButton(),
                       const SizedBox(height: 8),
                     ],
                   ),
@@ -52,18 +52,16 @@ class _buildPopupDialogState extends State<buildPopupDialog> {
     );
   }
 
-  Widget buildButton() {
+  Widget InfoButton() {
     return ElevatedButton(
-      onPressed: addOCity,
+      onPressed:  addCity,
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
       child: const Text('Enregistrer'),
     );
   }
 
-  void addOCity() async {
-    await addCity();
-  }
+  
 
   Future addCity() async {
     String Libelle = libelle;
