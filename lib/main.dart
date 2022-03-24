@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
               fontSizeFactor: 0.8,
               fontSizeDelta: 2.0,
             ),
-        primarySwatch: Colors.blue,
       ),
       home: const Home(title: 'Sun Is Up'),
     );

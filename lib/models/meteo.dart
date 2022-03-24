@@ -48,7 +48,7 @@ class Meteo {
     timezone = json['timezone'];
     id = json['id'];
     name = json['name'];
-    cod = json['cod'];
+    cod = json['cod'].runtimeType == int ? json['cod'] : int.parse(json['cod']);
   }
 
   Map<String, dynamic> toJson() {
@@ -79,8 +79,8 @@ class Coord {
   Coord({this.lon, this.lat});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lon = json['lon'];
-    lat = json['lat'];
+    lon = json['lon'].runtimeType == int ? json['lon'].toDouble() : json['lon'];
+    lat = json['lat'].runtimeType == int ? json['lat'].toDouble() : json['lat'];
   }
 
   Map<String, dynamic> toJson() {
@@ -134,7 +134,9 @@ class Main {
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = double.tryParse(json['temp'].toString()) ?? 0;
-    feelsLike = json['feels_like'];
+    feelsLike = json['feels_like'].runtimeType == int
+        ? json['feels_like'].toDouble()
+        : json['feels_like'];
     tempMin = double.tryParse(json['temp_min'].toString()) ?? 0;
     tempMax = json['temp_max'];
     pressure = json['pressure'];

@@ -252,8 +252,8 @@ class Coord {
   Coord({this.lat, this.lon});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lon = json['lon'];
+    lat = json['lat'].runtimeType == int ? json['lat'].toDouble() : json['lat'];
+    lon = json['lon'].runtimeType == int ? json['lon'].toDouble() : json['lon'];
   }
 
   Map<String, dynamic> toJson() {

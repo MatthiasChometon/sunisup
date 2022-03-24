@@ -44,15 +44,9 @@ class _WeatherPanelState extends State<WeatherPanel> {
                     title: Row(
                       children: [
                         Column(children: [
-                          Text(
-                            "${widget.city.Libelle}%",
-                            style: const TextStyle(color: Colors.black),
-                          ),
                           Row(children: [
-                            MeteoPanel(
-                                temp: "${widget.meteo.main!.temp}",
-                                humidity: "${widget.meteo.main!.humidity}%",
-                                deg: "${widget.meteo.wind!.deg}%"),
+                            Text("${widget.city.Libelle}%",
+                                style: const TextStyle(fontSize: 30)),
                             Image.network(widget.meteo.icon),
                             IconButton(
                               icon: const Icon(Icons.delete),
@@ -62,14 +56,17 @@ class _WeatherPanelState extends State<WeatherPanel> {
                               },
                             ),
                           ]),
-                          DatePanel(date: DateTime.now()),
-                          Row(children: [
-                            MeteoPanel(
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DatePanel(date: DateTime.now()),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: MeteoPanel(
                                 temp: "${widget.meteo.main!.temp}",
                                 humidity: "${widget.meteo.main!.humidity}%",
                                 deg: "${widget.meteo.wind!.deg}%"),
-                            Image.network(widget.meteo.icon),
-                          ])
+                          ),
                         ])
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +86,12 @@ class _WeatherPanelState extends State<WeatherPanel> {
                                 date: DateTime.parse(
                                     widget.forecastWeather.list![i].dtTxt ??
                                         '')),
-                            Image.network(widget.forecastWeather.list![i].icon),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Image.network(
+                                  widget.forecastWeather.list![i].icon),
+                            ),
                             Text(
                               "${widget.forecastWeather.list![i].main!.temp}°",
                               style: const TextStyle(color: Colors.black),
@@ -110,7 +112,6 @@ class _WeatherPanelState extends State<WeatherPanel> {
           ),
         ));
   }
-
   Widget InfoButton(int id) {
     return ElevatedButton(
       onPressed: () => () {
