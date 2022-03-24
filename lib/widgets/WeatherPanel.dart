@@ -38,15 +38,21 @@ class _WeatherPanelState extends State<WeatherPanel> {
                     title: Row(
                       children: [
                         Column(children: [
-                          const Text('Paris', style: TextStyle(fontSize: 30)),
-                          DatePanel(date: DateTime.now()),
                           Row(children: [
-                            MeteoPanel(
+                            const Text('Paris', style: TextStyle(fontSize: 30)),
+                            Image.network(widget.meteo.icon),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DatePanel(date: DateTime.now()),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MeteoPanel(
                                 temp: "${widget.meteo.main!.temp}",
                                 humidity: "${widget.meteo.main!.humidity}%",
                                 deg: "${widget.meteo.wind!.deg}%"),
-                            Image.network(widget.meteo.icon),
-                          ])
+                          ),
                         ])
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
