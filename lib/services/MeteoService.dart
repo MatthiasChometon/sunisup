@@ -85,9 +85,9 @@ Future<List<All_weather>> getAllMeteoInDatabase() async {
         position[0].latitude.toString(), position[0].longitude.toString());
     var forecastWeather = await getForecastWeather(
         position[0].latitude.toString(), position[0].longitude.toString());
-
+final city = City(Id_city: item.Id_city,Libelle: item.Libelle);
     //var ville = await CityDatabase.instance.getCity(item.Id_city.toInt());
-    return All_weather(item, meteo, forecastWeather);
+    return All_weather(city, meteo, forecastWeather);
   }).toList());
 
   /*var meteo = await Future.wait(dbMeteo.map((item) async {

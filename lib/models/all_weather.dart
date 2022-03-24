@@ -5,6 +5,6 @@ import './City.dart';
 class All_weather {
   final Meteo meteo;
   final ForecastWeather forecastWeather;
-  final city;
+  final City city;
   All_weather(this.city, this.meteo, this.forecastWeather);
 }
