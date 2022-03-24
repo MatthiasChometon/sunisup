@@ -80,6 +80,13 @@ flutter:
 
   assets:
       - assets/icons/sunIsUp.png
+      - assets/icons/sunIsUp_white.png
+      - assets/wallpapers/Clear.jpg
+      - assets/wallpapers/Clouds.jpg
+      - assets/wallpapers/Snow.jpg
+      - assets/wallpapers/Thunderstorm.jpg
+      - assets/wallpapers/Drizzle.jpg
+      - assets/wallpapers/Rain.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
