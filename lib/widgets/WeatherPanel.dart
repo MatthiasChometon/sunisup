@@ -40,7 +40,6 @@ class _WeatherPanelState extends State<WeatherPanel> {
               isFirstLoad) {
             _expanded = snapshot.data!.getBool("${widget.city.Id_city}")!;
             isFirstLoad = false;
-            print('cousousc');
           }
 
           return Container(
