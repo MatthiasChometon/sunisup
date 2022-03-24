@@ -8,6 +8,7 @@ import 'package:sunisup/widgets/DatePanel.dart';
 import 'package:sunisup/widgets/MeteoPanel.dart';
 import '../db/City.dart';
 import '../models/City.dart';
+import '../views/Home.dart';
 
 class WeatherPanel extends StatefulWidget {
   const WeatherPanel(
@@ -47,6 +48,13 @@ class _WeatherPanelState extends State<WeatherPanel> {
                             Text("${widget.city.Libelle}%",
                                 style: const TextStyle(fontSize: 30)),
                             Image.network(widget.meteo.icon),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              tooltip: '',
+                              onPressed: () {
+                                InfoButton(widget.city.Id_city ?? 0);
+                              },
+                            ),
                           ]),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -103,5 +111,22 @@ class _WeatherPanelState extends State<WeatherPanel> {
             },
           ),
         ));
+  }
+  Widget InfoButton(int id) {
+    return ElevatedButton(
+      onPressed: () => () {
+        DeleteCity(id);
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
+      child: const Text('Enregistrer'),
+    );
+  }
+
+  Future DeleteCity(id) async {
+    await CityDatabase.instance.DeleteCity(id);
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const Home(title: "SunIsUp")),
+    );
   }
 }
