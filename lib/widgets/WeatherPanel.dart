@@ -16,7 +16,7 @@ class WeatherPanel extends StatefulWidget {
       required this.meteo,
       required this.forecastWeather})
       : super(key: key);
-  final  City city;
+  final City city;
   final Meteo meteo;
   final ForecastWeather forecastWeather;
 
@@ -53,7 +53,13 @@ class _WeatherPanelState extends State<WeatherPanel> {
                                 humidity: "${widget.meteo.main!.humidity}%",
                                 deg: "${widget.meteo.wind!.deg}%"),
                             Image.network(widget.meteo.icon),
-                           
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              tooltip: '',
+                              onPressed: () {
+                                InfoButton(widget.city.Id_city ?? 0);
+                              },
+                            ),
                           ]),
                           DatePanel(date: DateTime.now()),
                           Row(children: [
@@ -104,5 +110,18 @@ class _WeatherPanelState extends State<WeatherPanel> {
         ));
   }
 
+  Widget InfoButton(int id) {
+    return ElevatedButton(
+      onPressed: () => () {
+        DeleteCity(id);
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
+      child: const Text('Enregistrer'),
+    );
+  }
 
+  Future DeleteCity(id) async {
+    await CityDatabase.instance.DeleteCity(id);
+  }
 }
