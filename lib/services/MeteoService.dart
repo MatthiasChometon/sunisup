@@ -64,10 +64,10 @@ Future<String> getWeatherIcon(String? iconPath) async {
 
 Future<List<All_weather>> getAllMeteoInDatabase() async {
   List<Position> dbMeteo = [
+    Position('40.4167754', '-3.7037902'),
     Position('12.17', '12.25'),
     Position('24.17', '24.42'),
     Position('12.17', '12.25'),
-    Position('24.17', '24.42'),
   ];
 
   var meteo = await Future.wait(dbMeteo.map((item) async {
