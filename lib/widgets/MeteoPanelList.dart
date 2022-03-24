@@ -42,7 +42,8 @@ class _DatePanelState extends State<MeteoPanelList> {
                   WeatherPanel(
                       key: Key('$index'),
                       meteo: widget.weathers[index].meteo,
-                      forecastWeather: widget.weathers[index].forecastWeather)
+                      forecastWeather: widget.weathers[index].forecastWeather,
+                      city: widget.weathers[index].city)
               ],
               onReorder: (int oldIndex, int newIndex) {
                 if (oldIndex < newIndex) {

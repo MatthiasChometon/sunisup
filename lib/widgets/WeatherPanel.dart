@@ -45,7 +45,7 @@ class _WeatherPanelState extends State<WeatherPanel> {
                       children: [
                         Column(children: [
                           Row(children: [
-                            Text("${widget.city.Libelle}%",
+                            Text("${widget.city.Libelle}",
                                 style: const TextStyle(fontSize: 30)),
                             Image.network(widget.meteo.icon),
                             IconButton(
@@ -64,8 +64,8 @@ class _WeatherPanelState extends State<WeatherPanel> {
                             padding: const EdgeInsets.all(16.0),
                             child: MeteoPanel(
                                 temp: "${widget.meteo.main!.temp}",
-                                humidity: "${widget.meteo.main!.humidity}%",
-                                deg: "${widget.meteo.wind!.deg}%"),
+                                humidity: "${widget.meteo.main!.humidity}",
+                                deg: "${widget.meteo.wind!.deg}"),
                           ),
                         ])
                       ],

@@ -5,6 +5,7 @@ import 'package:sunisup/models/all_weather.dart';
 import 'package:sunisup/models/meteo.dart';
 import 'package:sunisup/services/MeteoService.dart';
 import 'package:sunisup/widgets/MeteoPanelList.dart';
+import 'package:sunisup/widgets/Modal.dart';
 import 'package:sunisup/widgets/WeatherPanel.dart';
 
 class Home extends StatefulWidget {
@@ -35,17 +36,16 @@ class _HomeState extends State<Home> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: Text("Chargement en cours ... "));
             } else if (snapshot.connectionState == ConnectionState.done) {
-              return MeteoPanelList(weathers: snapshot.data!);
+              if (snapshot.data!.isNotEmpty) {
+                return MeteoPanelList(weathers: snapshot.data!);
+              }
+              return const Center(
+                  child: Text("Vous n'avez actuellement pas de ville"));
             } else {
-              return const Text("Une erreur est survenue");
+              return const Center(child: Text("Une erreur est survenue"));
             }
           }),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        onPressed: () => {},
-        tooltip: 'add city',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: Modal(),
     );
   }
 }
