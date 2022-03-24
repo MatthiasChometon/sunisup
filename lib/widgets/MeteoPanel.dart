@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class MeteoPanel extends StatefulWidget {
+
   const MeteoPanel(
       {Key? key, required this.temp, required this.humidity, required this.deg})
       : super(key: key);
@@ -17,6 +20,7 @@ class MeteoPanel extends StatefulWidget {
     return _MeteoPanelState();
   }
 }
+
 
 class _MeteoPanelState extends State<MeteoPanel> {
   @override

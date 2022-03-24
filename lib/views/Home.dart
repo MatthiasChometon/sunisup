@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
                           index += 1)
                         WeatherPanel(
                             key: Key('$index'),
+                            city:snapshot.data![index].city,
                             meteo: snapshot.data![index].meteo,
                             forecastWeather:
                                 snapshot.data![index].forecastWeather)
