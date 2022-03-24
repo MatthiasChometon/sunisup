@@ -3,26 +3,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../db/City.dart';
 import '../models/City.dart';
 
-class buildPopupDialog extends StatefulWidget {
+class Modal extends StatefulWidget {
   @override
-  State<buildPopupDialog> createState() => _buildPopupDialogState();
+  State<Modal> createState() => _buildPopupDialogState();
 }
 
-class _buildPopupDialogState extends State<buildPopupDialog> {
+class _buildPopupDialogState extends State<Modal> {
   late SharedPreferences prefs;
   String libelle = '';
 
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: Text("+"),
+    return FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet<void>(
             context: context,
             builder: (BuildContext context) {
               return Container(
                 height: 200,
-                color: Colors.yellow,
+                color: Color.fromARGB(255, 255, 255, 255),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +37,7 @@ class _buildPopupDialogState extends State<buildPopupDialog> {
                         validator: (val) =>
                             val = "" 'veuiller saisir un nom de ville',
                         onChanged: (val) => libelle = val,
-                        obscureText: true,
+                        obscureText: false,
                       ),
                       InfoButton(),
                       const SizedBox(height: 8),
@@ -47,21 +47,18 @@ class _buildPopupDialogState extends State<buildPopupDialog> {
               );
             },
           );
-        },
-      ),
-    );
+        });
   }
 
   Widget InfoButton() {
     return ElevatedButton(
-      onPressed:  addCity,
+      onPressed: addCity,
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0))),
       child: const Text('Enregistrer'),
     );
   }
-
-  
 
   Future addCity() async {
     String Libelle = libelle;
