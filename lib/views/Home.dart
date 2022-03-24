@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(63, 193, 201, 1),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           centerTitle: true,
           title: Text(widget.title),
           leading: Padding(
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
             }
           }),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(63, 193, 201, 1),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         onPressed: () => {},
         tooltip: 'add city',
         child: const Icon(Icons.add),
